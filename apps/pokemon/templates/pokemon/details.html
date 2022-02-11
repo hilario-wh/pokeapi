@@ -4,18 +4,33 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 col-lg-3 p-4">
-            <h5>Pokemon name</h5>
-            <img src="https://via.placeholder.com/420" class="img-fluid">
+            <h3>{{ details.name|capfirst }}</h3>
+            <img src="{{ details.sprites.front_default }}" class="img-fluid">
         </div>
     </div>
     <div class="row">
         <div class="col">
             <p>
-                <b>Peso: </b> 42<br>
-                <b>Altura: </b> 100<br>
-                <b>Habilidades: </b> Lorem<br>
-                <b>Movimientos: </b> Lorem<br>
-                <b>Tipo: </b> <a href="#no-link">Lorem</a><br>
+                <b>Tipo: </b><br>
+                <ul class="list">
+                    {% for type in details.types %}
+                    <li class="list-item"><a href="{% url 'pokemon:type' type.id %}">{{ type.type.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <b>Peso: </b> {{ details.weight }}<br>
+                <b>Altura: </b> {{ details.height }}<br>
+                <b>Habilidades: </b><br>
+                <ul class="list">
+                    {% for ability in details.abilities %}
+                    <li class="list-item">{{ ability.ability.name }}</li>
+                    {% endfor %}
+                </ul>
+                <b>Movimientos: </b><br>
+                <ul class="list">
+                    {% for move in details.moves %}
+                    <li class="list-item">{{ move.move.name }}</li>
+                    {% endfor %}
+                </ul>
             </p>
         </div>
     </div>

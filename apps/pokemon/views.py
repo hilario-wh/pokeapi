@@ -25,7 +25,16 @@ def pokemon_list(request):
 
 def pokemon_details(request, id):
     # https://pokeapi.co/api/v2/pokemon/{id or name}/
-    return render(request, template_name='pokemon/details.html')
+    url = 'https://pokeapi.co/api/v2/pokemon/{}/'.format(id)
+    response = requests.get(url)
+    if response.ok:
+        payload = response.json()
+        for type in payload.get('types',[]):
+            type_id = type.get('type').get('url')
+            type['id'] = type_id[31:-1]
+        return render(request, template_name='pokemon/details.html', context={'details': payload})
+    else:
+        raise Http404("No hay elementos")
 
 
 def pokemon_type(request, id):
