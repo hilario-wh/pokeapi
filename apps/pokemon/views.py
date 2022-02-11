@@ -18,7 +18,7 @@ def pokemon_list(request):
                 item_details = response.json()
                 item['sprites'] = item_details.get('sprites')
                 item['id'] = item_details.get('id')
-        return render(request, template_name='pokemon/list.html', context={'items': items})
+        return render(request, template_name='pokemon/list.html', context={'items': items, 'title': "Listado"})
     else:
         raise Http404("No hay elementos")
 
@@ -62,6 +62,6 @@ def pokemon_type(request, id):
                 """
                 if len(list) >= 10:
                     break
-        return render(request, template_name='pokemon/list.html', context={'items': list})
+        return render(request, template_name='pokemon/list.html', context={'items': list, 'title': 'Listado '+payload.get('name')})
     else:
         raise Http404("No hay elementos")
