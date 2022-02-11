@@ -5,6 +5,6 @@ from views import pokemon_list, pokemon_details, pokemon_type
 
 urlpatterns = [
     url(r'^$', pokemon_list, name='list'),
-    url(r'^/details/(?P<id>\d+)/$', pokemon_details, name='details'),
-    url(r'^/type/(?P<id>\d+)/$', pokemon_type, name='type'),
+    url(r'^details/(?P<id>\d+)/$', pokemon_details, name='details'),
+    url(r'^type/(?P<id>\d+)/$', pokemon_type, name='type'),
 ]
