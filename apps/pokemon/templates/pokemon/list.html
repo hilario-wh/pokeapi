@@ -3,11 +3,17 @@
 {% block content_main %}
 <div class="container mt-5">
     <div class="row">
+        {% for item in items %}
         <div class="col-md-4 col-lg-3 text-center p-4">
-            <h5>Pokemon name</h5>
-            <img src="https://via.placeholder.com/420" class="img-fluid">
-            <a href="#no-link" class="btn btn-warning mt-2">Ver pokemon</a>
+            <h5>{{ item.name|capfirst }}</h5>
+            <img src="{{ item.sprites.front_default }}" class="img-fluid"><br>
+            <a href="{% url 'pokemon:details' item.id %}" class="btn btn-warning mt-2">Ver pokemon</a>
         </div>
+        {% empty %}
+        <div class="col-12">
+            <h5>No hay elementos</h5>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock content_main %}
